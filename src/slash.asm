@@ -10,24 +10,32 @@ SECTION .text
   _slash:
     ; Initialize variables
     mov rax, 1 ; result
-    mov rcx, rdi ; current
+    movsx rcx, byte [rdi] ; current
 
     ; Initial condition
     cmp byte [rcx], 0
     je .return
 
+    ; Store result and prime in 128 bit registers
+    movq xmm0, [prime]
+    movq xmm1, rax
+
     ; Main Loop
     .slashLoop:
       ; Perform carry-less multiplication of result and prime
-      clm rax, prime
+      vpclmulqdq xmm1, xmm0, xmm1, 64
 
       ; XOR result with current
-      xor rax, byte [rcx]
+      movq xmm3, [rcx]
+      pxor xmm1, xmm3
 
       ; Loop logic
       inc rcx
       cmp byte [rcx], 0
       jne .slashLoop
+
+    ; Prepare result for return
+    movq rax, xmm1
 
     ; Return
     .return:
