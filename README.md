@@ -31,4 +31,4 @@ Slash is implemented in 64 bit assembly, optimized for speed. It doesn't compile
 
 ### License
 
-Licensed under the [MIT License](https://kingpixil.github.io/license) by [Kabir Shah](https://kabir.ml)
+Licensed under the [MIT License](https://kbrsh.github.io/license) by [Kabir Shah](https://kabir.ml)
