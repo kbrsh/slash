@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/kbrsh/slash" target="_blank"><img width="100" src="https://raw.githubusercontent.com/kbrsh/slash/master/img/logo.png"></a></p>
+<p align="center"><a href="https://github.com/kbrsh/slash" target="_blank"><img width="75" src="https://raw.githubusercontent.com/kbrsh/slash/master/img/logo.png"></a></p>
 
 <h1 align="center">Slash</h1>
 
