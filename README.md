@@ -1,3 +1,5 @@
+<a href="https://github.com/kbrsh/slash" target="_blank"><img width="100"src="https://raw.githubusercontent.com/kbrsh/slash/gh-pages/img/logo.png"></a>
+
 # Slash
 
 Fast, efficient hash
