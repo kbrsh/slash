@@ -1,8 +1,8 @@
-<p><a href="https://github.com/kbrsh/slash" target="_blank"><img width="100"src="https://raw.githubusercontent.com/kbrsh/slash/gh-pages/img/logo.png"></a></p>
+<p align="center"><a href="https://github.com/kbrsh/slash" target="_blank"><img width="100"src="https://raw.githubusercontent.com/kbrsh/slash/gh-pages/img/logo.png"></a></p>
 
-# Slash
+<h1 align="center">Slash</h1>
 
-Fast, efficient hash
+<p align="center">Fast, efficient hash</p>
 
 ### Usage
 
