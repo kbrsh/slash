@@ -30,7 +30,7 @@ Slash is implemented in 64 bit assembly, optimized for speed. It doesn't compile
 * `^` denotes bitwise exclusive OR (XOR)
 * `ror` denotes bitwise circular right shift
 * `byte` denotes the current byte being operated on
-* `prime` is a 64 bit constant chosen by a simulated annealing algorithm (`0xA171020315130201ULL`)
+* `prime` is a 64 bit constant chosen by a simulated annealing algorithm (`0xA171020315130201`)
 
 Any overflows should be handled by "wrapping around" the number, equivalent to a modulo with `0xFFFFFFFFFFFFFFFF`.
 
@@ -38,7 +38,7 @@ Any overflows should be handled by "wrapping around" the number, equivalent to a
 
 To verify the implementation is correct, run it against byte arrays of `0`, `0, 1`, `0, 1, 2`...`0...255`, and store all of the results in a byte array (each hash takes up 64 entries).
 
-Hash the result byte array, and the resulting hash should be `0x1fd71bf7b3370f18`.
+Hash the result byte array, and the resulting hash should be `0x78ec56964338e9c8`.
 
 ### License
 
