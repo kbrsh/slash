@@ -38,7 +38,7 @@ Any overflows should be handled by "wrapping around" the number, equivalent to a
 
 To verify the implementation is correct, run it against byte arrays of `0`, `0, 1`, `0, 1, 2`...`0...255`, and store all of the results in a byte array (each hash takes up 64 entries).
 
-Hash the result byte array, and the resulting hash should be `0x1`. This is due to an interesting property of the Slash hash function. Since the XOR cancels itself out during the second run.
+Hash the result byte array, and the resulting hash should be `0x1fd71bf7b3370f18`.
 
 ### License
 
