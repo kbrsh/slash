@@ -21,21 +21,24 @@ Slash is implemented in 64 bit assembly, optimized for speed. It doesn't compile
 
 1. The result is initialized at `1`
 2. For each byte (8 bits):
-   * Set the result to `(result @ prime) ^ (byte)`
+   * Set the result to `ror((result @ prime) ^ (byte), 7)`
 3. Return masked 64 bit unsigned result
 
 ##### Details
 
 * `@` denotes carry-less multiplication
-* `^` denotes exclusive OR (XOR)
+* `^` denotes bitwise exclusive OR (XOR)
+* `ror` denotes bitwise circular right shift
 * `byte` denotes the current byte being operated on
-* `prime` is a constant chosen by a simulated annealing algorithm (`0xA1720315130235ULL`)
+* `prime` is a 64 bit constant chosen by a simulated annealing algorithm (`0xA171020315130201ULL`)
+
+Any overflows should be handled by "wrapping around" the number, equivalent to a modulo with `0xFFFFFFFFFFFFFFFF`.
 
 ##### Verification
 
 To verify the implementation is correct, run it against byte arrays of `0`, `0, 1`, `0, 1, 2`...`0...255`, and store all of the results in a byte array (each hash takes up 64 entries).
 
-Hash the result byte array, and the resulting hash should be `0x2942e375`.
+Hash the result byte array, and the resulting hash should be `0x1`. This is due to an interesting property of the Slash hash function. Since the XOR cancels itself out during the second run.
 
 ### License
 

@@ -1,6 +1,6 @@
 SECTION .data
   ; Prime constant
-  prime dq 0xA1720315130235
+  prime dq 0xA171020315130201
 
 SECTION .text
   DEFAULT REL
@@ -13,20 +13,23 @@ SECTION .text
     mov rcx, rdi ; current
 
     ; Initial condition
-    cmp byte [rcx], 0
+    cmp rcx, 0
     je .return
 
     ; Main Loop
     .slashLoop:
       ; Perform carry-less multiplication of result and prime
-      clm rax, prime
+      clm rax, qword [prime]
 
       ; XOR result with current
-      xor rax, byte [rcx]
+      xor rax, rcx
+
+      ; Rotate right by 7
+      ror rax, 7
 
       ; Loop logic
       inc rcx
-      cmp byte [rcx], 0
+      cmp rcx, 0
       jne .slashLoop
 
     ; Return
