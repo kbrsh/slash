@@ -36,7 +36,7 @@ Any overflows should be handled by "wrapping around" the number, equivalent to a
 
 ##### Verification
 
-To verify the implementation is correct, run it against byte arrays of `0`, `0, 1`, `0, 1, 2`...`0...255`, and store all of the results in a byte array (each hash takes up 64 entries).
+To verify the implementation is correct, run it against byte arrays of `0`, `0, 1`, `0, 1, 2`...`0...255`, and store all of the results in a byte array (each hash takes up 8 entries in little-endian format).
 
 Hash the result byte array, and the resulting hash should be `0x78ec56964338e9c8`.
 
