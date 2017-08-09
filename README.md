@@ -31,6 +31,12 @@ Slash is implemented in 64 bit assembly, optimized for speed. It doesn't compile
 * `byte` denotes the current byte being operated on
 * `prime` is a constant chosen by a simulated annealing algorithm (`0xA1720315130235ULL`)
 
+##### Verification
+
+To verify the implementation is correct, run it against byte arrays of `0`, `0, 1`, `0, 1, 2`...`0...255`, and store all of the results in a byte array (each hash takes up 64 entries).
+
+Hash the result byte array, and the resulting hash should be `0x2942e375`.
+
 ### License
 
 Licensed under the [MIT License](https://kbrsh.github.io/license) by [Kabir Shah](https://kabir.ml)
