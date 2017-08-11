@@ -18,10 +18,10 @@ SECTION .text
 
     ; Main Loop
     .slashLoop:
-      ; Perform carry-less multiplication of result and prime
-      clm rax, qword [prime]
+      ; Multiply result and prime
+      imul rax, qword [prime]
 
-      ; XOR result with current
+      ; XOR result with current byte
       xor rax, rcx
 
       ; Rotate right by 7

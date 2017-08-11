@@ -17,28 +17,28 @@ unsigned long long hash = slash(str);
 
 ### Implementation
 
-Slash is implemented in 64 bit assembly, optimized for speed. It doesn't compile, as the carry-less multiplication isn't implemented by the target architecture yet. Slash is a constant work in progress and is subject to change. The actual hashing process goes like:
+Slash is implemented in 64 bit assembly, optimized for speed. The hashing process goes like:
 
 1. The result is initialized at `1`
 2. For each byte (8 bits):
-   * Set the result to `ror((result @ prime) ^ (byte), 7)`
-3. Return masked 64 bit unsigned result
+   * Set the result to `ror((result * prime) ^ (byte), 7)`
+3. Return 64 bit unsigned result
 
 ##### Details
 
-* `@` denotes carry-less multiplication
-* `^` denotes bitwise exclusive OR (XOR)
-* `ror` denotes bitwise circular right shift
-* `byte` denotes the current byte being operated on
+* `*` denotes a 64 bit multiplication (mod 2<sup>64</sup>)
+* `^` denotes a 64 bit bitwise exclusive OR (XOR)
+* `ror` denotes a 64 bit bitwise circular right shift
+* `byte` denotes a the current byte being operated on
 * `prime` is a 64 bit constant chosen by a simulated annealing algorithm (`0xA171020315130201`)
 
-Any overflows should be handled by "wrapping around" the number, equivalent to a modulo with `0xFFFFFFFFFFFFFFFF`.
+Any overflows should be handled by "wrapping around" the number, equivalent to a modulo with `0xFFFFFFFFFFFFFFFF` (2<sup>64</sup>).
 
 ##### Verification
 
 To verify the implementation is correct, run it against byte arrays of `0`, `0, 1`, `0, 1, 2`...`0...255`, and store all of the results in a byte array (each hash takes up 8 entries in little-endian format).
 
-Hash the result byte array, and the resulting hash should be `0x78ec56964338e9c8`.
+Hash the result byte array, and the resulting hash should be `0xC5C1D27F4283993A`. A C implementation of this is in the `test` directory.
 
 ### License
 
