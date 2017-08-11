@@ -9,7 +9,10 @@ SECTION .text
   GLOBAL _slash
   _slash:
     ; Initialize variables
+
     mov rax, 1 ; result
+
+    mov r8, qword [prime] ; prime
 
     ; current
     mov rdx, rdi
@@ -22,7 +25,7 @@ SECTION .text
     ; Main Loop
     .slashLoop:
       ; Multiply result and prime
-      imul rax, qword [prime]
+      imul rax, r8
 
       ; XOR result with current byte
       xor rax, rcx
