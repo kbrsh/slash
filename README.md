@@ -11,8 +11,8 @@ Slash is a _non-cryptographic_ hash, and is intended to be used as a general has
 ```c
 #include "slash.h"
 
-char *str = "Slash";
-unsigned long long hash = slash(str);
+const unsigned char *key = "Slash";
+unsigned long long hash = slash(key);
 ```
 
 ### Implementation
