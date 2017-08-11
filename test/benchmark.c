@@ -5,7 +5,7 @@
 #include "slash.h"
 
 #define keySize 64
-#define totalKeys 10000
+#define totalKeys 50000
 
 unsigned long long slashC(const unsigned char *key) {
   unsigned long long result = 1;
