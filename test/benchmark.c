@@ -4,7 +4,8 @@
 #include <time.h>
 #include "slash.h"
 
-#define size 50000
+#define keySize 64
+#define totalKeys 10000
 
 unsigned long long slashC(const unsigned char *key) {
   unsigned long long result = 1;
@@ -19,10 +20,10 @@ unsigned long long slashC(const unsigned char *key) {
   return result;
 }
 
-void generate(unsigned char keys[size][6]) {
+void generate(unsigned char keys[totalKeys][keySize+1]) {
   srand(clock());
 
-  for(int i = 0; i < size; i++) {
+  for(int i = 0; i < totalKeys; i++) {
     for(int j = 0; j < 5; j++) {
       keys[i][j] = (unsigned char)((rand() % 254) + 1);
     }
@@ -36,22 +37,62 @@ void generate(unsigned char keys[size][6]) {
   }
 }
 
-void test(const char *name, unsigned char keys[size][6], unsigned long long (*hash)(const unsigned char *key)) {
-  clock_t seconds = clock();
-  unsigned long long results[size]__attribute__((unused));
+static __inline__ unsigned long long rdtsc(void) {
+  unsigned hi, lo;
+  __asm__ __volatile__ ("rdtsc" : "=a"(lo), "=d"(hi));
+  return ((unsigned long long)lo) | (((unsigned long long)hi)<<32);
+}
 
-  for(int i = 0; i < size; i++) {
-    results[i] = hash(keys[i]);
+double doubleMean(double amount[totalKeys]) {
+  double mean = 0;
+
+  for(int i = 0; i < totalKeys; i++) {
+    mean += amount[i];
   }
 
-  printf("%s took %.2fms\n", name, (double)(clock() - seconds)/(CLOCKS_PER_SEC/1000));
+  return mean / totalKeys;
+}
+
+unsigned long long mean(unsigned long long amount[totalKeys]) {
+  unsigned long long mean = 0;
+
+  for(int i = 0; i < totalKeys; i++) {
+    mean += amount[i];
+  }
+
+  return mean / totalKeys;
+}
+
+void test(const char *name, unsigned char keys[totalKeys][keySize+1], unsigned long long (*hash)(const unsigned char *key)) {
+  clock_t secondsStart, secondsEnd;
+  double seconds[totalKeys];
+
+  unsigned long long cyclesStart, cyclesEnd;
+  unsigned long long cycles[totalKeys];
+
+  unsigned long long results[totalKeys]__attribute__((unused));
+
+  for(int i = 0; i < totalKeys; i++) {
+    secondsStart = clock();
+    cyclesStart = rdtsc();
+
+    results[i] = hash(keys[i]);
+
+    secondsEnd = clock();
+    cyclesEnd = rdtsc();
+
+    seconds[i] = (secondsEnd - secondsStart) / ((unsigned long long)CLOCKS_PER_SEC / 1000000);
+    cycles[i] = cyclesEnd - cyclesStart;
+  }
+
+  printf("%s\n  took %.3fμs\n  %llu cycles per byte\n\n", name, doubleMean(seconds), mean(cycles));
 }
 
 int main(void) {
-  unsigned char keys[size][6];
+  unsigned char keys[totalKeys][keySize+1];
   generate(keys);
 
-  printf("Benchmarking by hashing %d keys\n\n", size);
+  printf("Benchmarking by hashing %d keys with a size of %d bytes\n\n", totalKeys, keySize);
 
   test("Slash", keys, slash);
   test("Slash (C Implementation)", keys, slashC);
