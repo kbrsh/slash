@@ -1,9 +1,10 @@
-#include "stdio.h"
+#include <stdio.h>
+#include "slash.h"
 
 unsigned int passed;
 unsigned int failed;
 
-void expect(unsigned long long num1, unsigned long long num2, unsigned char *message) {
+void expect(unsigned long long num1, unsigned long long num2, char *message) {
   if(num1 == num2) {
     passed++;
     printf("\x1b[32m✓ \x1b[0m%s\n", message);
@@ -11,19 +12,6 @@ void expect(unsigned long long num1, unsigned long long num2, unsigned char *mes
     failed++;
     printf("\x1b[31m❌ \x1b[0m%s\nExpected %llx to equal %llx\n", message, num1, num2);
   }
-}
-
-unsigned long long slash(const unsigned char *key) {
-  unsigned long long result = 1;
-  unsigned long long prime = 0xA171020315130201ULL;
-  unsigned long long current;
-
-  while((current = *key++) != '\0') {
-    result = (result * prime) ^ (current);
-    result = (result >> 7) | (result << 57);
-  }
-
-  return result;
 }
 
 int main(void) {
@@ -42,9 +30,9 @@ int main(void) {
 
   if(failed == 0) {
     printf("\n\x1b[32mSuccess\x1b[0m %d Tests Passing\n", passed);
+    return 0;
   } else {
     printf("\n\x1b[31mFail\x1b[0m %d Tests Failing, %d Tests Passing\n", failed, passed);
+    return 1;
   }
-
-  return 0;
 }

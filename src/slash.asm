@@ -10,11 +10,13 @@ SECTION .text
   _slash:
     ; Initialize variables
     mov rax, 1 ; result
-    mov rcx, rdi ; current
+
+    ; current
+    xor rcx, rcx
+    mov cl, byte [rdi]
 
     ; Initial condition
-    cmp rcx, 0
-    je .return
+    cmp cl, 0
 
     ; Main Loop
     .slashLoop:
@@ -28,8 +30,9 @@ SECTION .text
       ror rax, 7
 
       ; Loop logic
-      inc rcx
-      cmp rcx, 0
+      add rdi, 1
+      mov cl, byte [rdi]
+      cmp cl, 0
       jne .slashLoop
 
     ; Return
