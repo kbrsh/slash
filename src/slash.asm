@@ -10,9 +10,11 @@ SECTION .text
   _slash:
     ; Initialize variables
 
-    mov rax, 1 ; result
-
-    mov r8, qword [prime] ; prime
+    ; result
+    mov rax, 1
+    
+    ; prime
+    mov r8, qword [prime]
 
     ; current
     mov rdx, rdi
