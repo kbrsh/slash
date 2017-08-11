@@ -12,8 +12,9 @@ SECTION .text
     mov rax, 1 ; result
 
     ; current
+    mov rdx, rdi
     xor rcx, rcx
-    mov cl, byte [rdi]
+    mov cl, byte [rdx]
 
     ; Initial condition
     cmp cl, 0
@@ -30,8 +31,8 @@ SECTION .text
       ror rax, 7
 
       ; Loop logic
-      add rdi, 1
-      mov cl, byte [rdi]
+      add rdx, 1
+      mov cl, byte [rdx]
       cmp cl, 0
       jne .slashLoop
 
