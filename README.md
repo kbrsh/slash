@@ -17,7 +17,7 @@ unsigned long long hash = slash(str);
 
 ### Implementation
 
-Slash is implemented in 64 bit assembly, optimized for speed. It doesn't compile, as the carry-less multiplication isn't implemented by the target architecture yet. The actual hashing process goes like:
+Slash is implemented in 64 bit assembly, optimized for speed. It doesn't compile, as the carry-less multiplication isn't implemented by the target architecture yet. Slash is a constant work in progress and is subject to change. The actual hashing process goes like:
 
 1. The result is initialized at `1`
 2. For each byte (8 bits):
