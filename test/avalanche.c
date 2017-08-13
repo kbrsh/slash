@@ -59,7 +59,7 @@ void avalanche(unsigned char keys[totalKeys][keySize + 1]) {
     for(int j = 0; j < keySize; j++) {
       strcpy((char*)flipped, (char*)key);
       for(int n = 0; n < 8; n++) {
-        flipped[j] = key[j] ^ (1ULL << n);
+        flipped[j] = key[j] ^ (1U << n);
         result = slash(flipped);
         diff = original ^ result;
 
