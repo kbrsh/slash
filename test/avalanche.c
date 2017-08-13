@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 #include "slash.h"
 
-#define totalKeys 1
+#define totalKeys 1000
 #define keySize 8
+#define bitSize keySize * 8
 
 void generate(unsigned char keys[totalKeys][keySize + 1]) {
   srand(clock());
@@ -26,30 +28,53 @@ void generate(unsigned char keys[totalKeys][keySize + 1]) {
   }
 }
 
+void svg(double results[bitSize][bitSize]) {
+  printf("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"description\" content=\"Slash Avalanche Diagram\"><meta name=\"author\" content=\"Kabir Shah\"><title>Slash | Avalanche</title><link rel=\"stylesheet\" type=\"text/css\" href=\"https://rawgit.com/kbrsh/wing/master/dist/wing.min.css\" /></head><body><div class=\"full-screen center\"><svg width=\"300\" height=\"300\" xmlns=\"http://www.w3.org/2000/svg\">");
+
+  for(int i = 0; i < bitSize; i++) {
+    for(int j = 0; j < bitSize; j++) {
+      results[i][j] = (results[i][j] / ((double)bitSize)) * 100.0;
+      printf("<rect x=\"%d\" y=\"%d\" width=\"5\" height=\"5\" fill=\"hsl(197, 100%%, %d%%)\"/>", i * 5, j * 5, (int)round(results[i][j]));
+    }
+  }
+
+  printf("</svg></div></body></html>");
+}
+
 void avalanche(unsigned char keys[totalKeys][keySize + 1]) {
-  unsigned long long results[keySize];
+  double results[bitSize][bitSize] = {{0.0}};
+
   unsigned char *key;
-  unsigned char *flipped = malloc(keySize + 1);
   unsigned long long original;
+
+  unsigned char flipped[keySize + 1];
+  unsigned long long result;
+
+  unsigned long long diff;
+
   for(int i = 0; i < totalKeys; i++) {
     key = keys[i];
     original = slash(key);
-    for(int x = 0; x < keySize; x++) {
-      printf("%d ", key[x]);
-    }
-    printf("\n");
 
     for(int j = 0; j < keySize; j++) {
       strcpy((char*)flipped, (char*)key);
       for(int n = 0; n < 8; n++) {
         flipped[j] = key[j] ^ (1ULL << n);
-        for(int x = 0; x < keySize; x++) {
-          printf("%d ", flipped[x]);
+        result = slash(flipped);
+        diff = original ^ result;
+
+        for(int k = 0; k < bitSize; k++) {
+          if((diff & 1) != 0) {
+            results[(j * 8) + n][k]++;
+          }
+
+          diff = diff >> 1;
         }
-        printf("\n");
       }
     }
   }
+
+  svg(results);
 }
 
 int main(void) {
