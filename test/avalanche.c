@@ -33,7 +33,7 @@ void svg(double results[bitSize][bitSize]) {
 
   for(int i = 0; i < bitSize; i++) {
     for(int j = 0; j < bitSize; j++) {
-      results[i][j] = (results[i][j] / ((double)bitSize)) * 100.0;
+      results[i][j] = (results[i][j] / ((double)totalKeys)) * 100.0;
       printf("<rect x=\"%d\" y=\"%d\" width=\"5\" height=\"5\" fill=\"hsl(197, 100%%, %d%%)\"/>", i * 5, j * 5, (int)round(results[i][j]));
     }
   }
