@@ -20,7 +20,7 @@ unsigned long long slashC(const unsigned char *key) {
   return result;
 }
 
-void generate(unsigned char keys[totalKeys][keySize+1]) {
+void generate(unsigned char keys[totalKeys][keySize + 1]) {
   srand(clock());
 
   for(int i = 0; i < totalKeys; i++) {
@@ -65,7 +65,7 @@ unsigned long long mean(unsigned long long amount[totalKeys]) {
   return mean / totalKeys;
 }
 
-void test(const char *name, unsigned char keys[totalKeys][keySize+1], unsigned long long (*hash)(const unsigned char *key)) {
+void test(const char *name, unsigned char keys[totalKeys][keySize + 1], unsigned long long (*hash)(const unsigned char *key)) {
   clock_t secondsStart, secondsEnd;
   double seconds[totalKeys];
 
@@ -91,7 +91,7 @@ void test(const char *name, unsigned char keys[totalKeys][keySize+1], unsigned l
 }
 
 int main(void) {
-  unsigned char keys[totalKeys][keySize+1];
+  unsigned char keys[totalKeys][keySize + 1];
   generate(keys);
 
   printf("Benchmarking by hashing %d keys with a size of %d bytes\n\n", totalKeys, keySize);
