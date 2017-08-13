@@ -4,8 +4,8 @@
 #include <time.h>
 #include "slash.h"
 
-#define keySize 64
 #define totalKeys 50000
+#define keySize 64
 
 unsigned long long slashC(const unsigned char *key) {
   unsigned long long result = 1;
@@ -24,9 +24,11 @@ void generate(unsigned char keys[totalKeys][keySize+1]) {
   srand(clock());
 
   for(int i = 0; i < totalKeys; i++) {
-    for(int j = 0; j < 5; j++) {
+    for(int j = 0; j < keySize; j++) {
       keys[i][j] = (unsigned char)((rand() % 254) + 1);
     }
+
+    keys[i][keySize] = '\0';
 
     for(int n = 0; n < (i - 1); n++) {
       if(strcmp((char*)keys[n], (char*)keys[i]) == 0) {
@@ -85,7 +87,7 @@ void test(const char *name, unsigned char keys[totalKeys][keySize+1], unsigned l
     cycles[i] = cyclesEnd - cyclesStart;
   }
 
-  printf("%s\n  took %.3fμs\n  %llu cycles per byte\n\n", name, doubleMean(seconds), mean(cycles));
+  printf("%s\n  took %.3fμs\n  %llu cycles per hash\n\n", name, doubleMean(seconds), mean(cycles));
 }
 
 int main(void) {

@@ -6,3 +6,7 @@ gcc -Wall test/test.c src/slash.o -o test/test -I ./include
 # Compile and Run Benchmarks
 gcc -Wall test/benchmark.c src/slash.o -o test/benchmark -I ./include
 ./test/benchmark
+
+# Compile and Run Avalanche Diagram Generator
+gcc -Wall test/avalanche.c src/slash.o -o test/avalanche -I ./include
+./test/avalanche
