@@ -12,7 +12,7 @@ SECTION .text
 
     ; result
     mov rax, 1
-    
+
     ; prime
     mov r8, qword [prime]
 
@@ -23,6 +23,7 @@ SECTION .text
 
     ; Initial condition
     cmp cl, 0
+    je .return
 
     ; Main Loop
     .slashLoop:
