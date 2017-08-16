@@ -11,7 +11,7 @@ SECTION .text
     ; Initialize variables
 
     ; result
-    mov rax, 1
+    xor rax, rax
 
     ; prime
     mov r8, qword [prime]
@@ -27,11 +27,11 @@ SECTION .text
 
     ; Main Loop
     .slashLoop:
-      ; Multiply result and prime
-      imul rax, r8
-
       ; XOR result with current byte
       xor rax, rcx
+
+      ; Multiply result and prime
+      imul rax, r8
 
       ; Rotate right by 7
       ror rax, 7
