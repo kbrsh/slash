@@ -5,7 +5,7 @@
 #include <math.h>
 #include "slash.h"
 
-#define totalKeys 50000
+#define totalKeys 1000
 #define keySize 8
 #define bitSize keySize * 8
 
@@ -70,6 +70,8 @@ void avalanche(unsigned char keys[totalKeys][keySize + 1]) {
 
           diff = diff >> 1;
         }
+
+        flipped[j] = key[j];
       }
     }
   }
