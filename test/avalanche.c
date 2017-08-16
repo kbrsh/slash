@@ -5,7 +5,7 @@
 #include <math.h>
 #include "slash.h"
 
-#define totalKeys 1000
+#define totalKeys 50000
 #define keySize 8
 #define bitSize keySize * 8
 
