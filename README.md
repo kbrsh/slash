@@ -19,7 +19,7 @@ unsigned long long hash = slash(key);
 
 Slash is implemented in 64 bit assembly, optimized for speed. The hashing process goes like:
 
-1. The result is initialized at `1`
+1. The result is initialized at `0`
 2. For each byte (8 bits):
    * Set the result to `ror((result ^ byte) * (prime), 7)`
 3. Return 64 bit unsigned result
