@@ -21,6 +21,7 @@ unsigned long long slashC(const unsigned char *key) {
 }
 
 void generate(unsigned char keys[totalKeys][keySize + 1]) {
+  // Generate random keys
   srand(clock());
 
   for(int i = 0; i < totalKeys; i++) {
@@ -46,6 +47,7 @@ static __inline__ unsigned long long rdtsc(void) {
 }
 
 double doubleMean(double amount[totalKeys]) {
+  // Get mean of doubles
   double mean = 0;
 
   for(int i = 0; i < totalKeys; i++) {
@@ -56,6 +58,7 @@ double doubleMean(double amount[totalKeys]) {
 }
 
 unsigned long long mean(unsigned long long amount[totalKeys]) {
+  // Get mean of unsigned 64 bit numbers
   unsigned long long mean = 0;
 
   for(int i = 0; i < totalKeys; i++) {
@@ -66,6 +69,7 @@ unsigned long long mean(unsigned long long amount[totalKeys]) {
 }
 
 void test(const char *name, unsigned char keys[totalKeys][keySize + 1], unsigned long long (*hash)(const unsigned char *key)) {
+  // Benchmark time and cycles
   clock_t secondsStart, secondsEnd;
   double seconds[totalKeys];
 
