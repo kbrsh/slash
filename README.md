@@ -38,7 +38,7 @@ Any overflows should be handled by "wrapping around" the number, equivalent to a
 
 To verify the implementation is correct, run it against byte arrays of `{1}, {1, 2}, {1, 2, 3} ... {1 - 255}`, and store all of the results in a byte array (each hash takes up 8 entries in little-endian format).
 
-Hash the result byte array, and the resulting hash should be `0x6A0DF6DA0C58E00C`. A C implementation of this is in the `test` directory.
+Hash the result byte array, and the resulting hash should be `0x6A0DF6DA0C58E00C`. A C implementation of this is in the `test` directory (`test/test.c`).
 
 ### License
 
