@@ -10,3 +10,7 @@ gcc -Wall test/benchmark.c src/slash.o -o test/benchmark -I ./include
 # Compile and Run Avalanche Tests
 gcc -Wall test/avalanche.c src/slash.o -o test/avalanche -I ./include
 ./test/avalanche
+
+# Compile and Run Chaos Grapher
+gcc -Wall test/graph.c src/slash.o -o test/graph -I ./include
+./test/graph | points.txt
