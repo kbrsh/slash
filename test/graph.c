@@ -18,7 +18,7 @@ unsigned long long slashC(const unsigned char *key) {
 int main() {
   unsigned long long output = 1;
   for(int i = 0; i < total; i++) {
-    printf("%d	%llu\n", i, output);
+    printf("%d	%llu\n", i, output % total);
     output = slashC((unsigned char*)&output);
   }
   return 0;
