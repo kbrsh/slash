@@ -1,0 +1,8 @@
+dist
+*.o
+src/slash
+test/avalanche
+test/benchmark
+test/graph
+test/test
+.DS_Store
