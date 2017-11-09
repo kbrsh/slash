@@ -1,7 +1,7 @@
 #include "slash.h"
 #include "stdio.h"
 
-#define total 100
+#define total 1000
 
 unsigned long long slashC(const unsigned char *key) {
   unsigned long long result = 0;
