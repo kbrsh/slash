@@ -40,6 +40,10 @@ To verify the implementation is correct, run it against byte arrays of `{1}, {1,
 
 Hash the result byte array, and the resulting hash should be `0x6A0DF6DA0C58E00C`. A C implementation of this is in the `test` directory (`test/test.c`).
 
+### Support
+
+Support Slash [on Patreon](https://patreon.com/kbrsh) to help sustain the development of the project. The maker of the project works on open source for free. If you or your company depend on this project, then it makes sense to donate to ensure that the project is maintained. 
+
 ### License
 
 Licensed under the [MIT License](https://kbrsh.github.io/license) by [Kabir Shah](https://kabir.ml)
