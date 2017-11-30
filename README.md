@@ -6,7 +6,7 @@
 
 ### Usage
 
-Slash is a _non-cryptographic_ hash function, and is intended to be used for general purposes. It generates very few collisions, results in uniformly distributed hashes, and good avalanche properties.
+Slash is a _non-cryptographic_ hash function intended to be used for general purposes. It is highly collision resistant, results in uniformly distributed hashes, and has good avalanche properties.
 
 ```c
 #include "slash.h"
@@ -42,7 +42,7 @@ Hash the result byte array, and the resulting hash should be `0x6A0DF6DA0C58E00C
 
 ### Support
 
-Support Slash [on Patreon](https://patreon.com/kbrsh) to help sustain the development of the project. The maker of the project works on open source for free. If you or your company depend on this project, then it makes sense to donate to ensure that the project is maintained. 
+Support Slash [on Patreon](https://patreon.com/kbrsh) to help sustain the development of the project. The maker of the project works on open source for free. If you or your company depend on this project, then it makes sense to donate to ensure that the project is maintained.
 
 ### License
 
