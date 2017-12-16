@@ -26,13 +26,13 @@ Slash is implemented in 64 bit assembly, optimized for speed. The hashing proces
 
 ##### Details
 
-* `*` denotes a 64 bit multiplication (mod 2<sup>64</sup> - 1)
+* `*` denotes a 64 bit multiplication (mod 2<sup>64</sup>)
 * `^` denotes a 64 bit bitwise exclusive OR (XOR)
 * `ror` denotes a 64 bit bitwise circular right shift
 * `byte` denotes a the current byte being operated on
 * `prime` is a 64 bit constant chosen by a simulated annealing algorithm (`0xA171020315130201`)
 
-Any overflows should be handled by "wrapping around" the number, equivalent to a modulo with 2<sup>64</sup> - 1 (`0xFFFFFFFFFFFFFFFF`).
+Any overflows should be handled by "wrapping around" the number, equivalent to a modulo with 2<sup>64</sup>.
 
 ##### Verification
 
