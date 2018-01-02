@@ -1,7 +1,7 @@
 /**
  * Slash
  * Fast, efficient hash
- * Copyright 2017 Kabir Shah
+ * Copyright 2017-2018 Kabir Shah
  * Released under the MIT License
  */
 
