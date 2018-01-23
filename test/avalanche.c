@@ -64,7 +64,7 @@ void avalanche(unsigned char keys[totalKeys][keySize + 1]) {
         diff = original ^ result;
 
         for(int k = 0; k < bitSize; k++) {
-          if((diff & 1) != 0) {
+          if((diff & 1) == 1) {
             results[(j * 8) + n][k]++;
           }
 
