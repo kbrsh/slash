@@ -29,7 +29,7 @@ void generate(unsigned char keys[totalKeys][keySize + 1]) {
 }
 
 void svg(double results[bitSize][bitSize]) {
-  printf("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"description\" content=\"Slash Avalanche Diagram\"><meta name=\"author\" content=\"Kabir Shah\"><title>Slash | Avalanche</title><link rel=\"stylesheet\" type=\"text/css\" href=\"https://rawgit.com/kbrsh/wing/master/dist/wing.min.css\" /></head><body><div class=\"full-screen center\"><svg width=\"300\" height=\"300\" xmlns=\"http://www.w3.org/2000/svg\">");
+  printf("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"description\" content=\"Slash Avalanche Diagram\"><meta name=\"author\" content=\"Kabir Shah\"><title>Slash | Avalanche</title><link rel=\"stylesheet\" type=\"text/css\" href=\"https://rawgit.com/kbrsh/wing/master/dist/wing.min.css\" /></head><body><div class=\"full-screen center\"><svg width=\"320\" height=\"320\" xmlns=\"http://www.w3.org/2000/svg\">");
 
   for(int i = 0; i < bitSize; i++) {
     for(int j = 0; j < bitSize; j++) {
