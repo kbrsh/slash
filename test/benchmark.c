@@ -8,6 +8,7 @@
 #define keySize 64
 
 unsigned long long slashC(const unsigned char *key) {
+  // Slash C
   unsigned long long result = 0;
   unsigned long long prime = 0xA171020315130201ULL;
   unsigned long long current;
