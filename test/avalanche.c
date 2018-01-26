@@ -28,11 +28,11 @@ void generate(unsigned char keys[totalKeys][keySize + 1]) {
   }
 }
 
-void svg(double results[bitSize][bitSize]) {
+void svg(double results[bitSize][64]) {
   printf("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><meta name=\"description\" content=\"Slash Avalanche Diagram\"><meta name=\"author\" content=\"Kabir Shah\"><title>Slash | Avalanche</title><link rel=\"stylesheet\" type=\"text/css\" href=\"https://rawgit.com/kbrsh/wing/master/dist/wing.min.css\" /></head><body><div class=\"full-screen center\"><svg width=\"320\" height=\"320\" xmlns=\"http://www.w3.org/2000/svg\">");
 
   for(int i = 0; i < bitSize; i++) {
-    for(int j = 0; j < bitSize; j++) {
+    for(int j = 0; j < 64; j++) {
       results[i][j] = (results[i][j] / ((double)totalKeys)) * 100.0;
       printf("<rect x=\"%d\" y=\"%d\" width=\"5\" height=\"5\" fill=\"hsl(197, 100%%, %d%%)\"/>", i * 5, j * 5, (int)round(results[i][j]));
     }
@@ -42,7 +42,7 @@ void svg(double results[bitSize][bitSize]) {
 }
 
 void avalanche(unsigned char keys[totalKeys][keySize + 1]) {
-  double results[bitSize][bitSize] = {{0.0}};
+  double results[bitSize][64] = {{0.0}};
 
   unsigned char *key;
   unsigned long long original;
@@ -63,7 +63,7 @@ void avalanche(unsigned char keys[totalKeys][keySize + 1]) {
         result = slash(flipped);
         diff = original ^ result;
 
-        for(int k = 0; k < bitSize; k++) {
+        for(int k = 0; k < 64; k++) {
           if((diff & 1) == 1) {
             results[(j * 8) + n][k]++;
           }
