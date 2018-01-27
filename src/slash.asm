@@ -1,6 +1,6 @@
 SECTION .data
   ; Prime constant
-  prime dq 0xA171020315130201
+  prime dq 0xA01731A5AC74E8DB
 
 SECTION .text
   DEFAULT REL
@@ -33,8 +33,8 @@ SECTION .text
       ; Multiply result and prime
       imul rax, r8
 
-      ; Rotate right by 7
-      ror rax, 7
+      ; Rotate right by 8
+      ror rax, 8
 
       ; Loop logic
       add rdx, 1
