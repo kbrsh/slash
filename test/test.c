@@ -26,7 +26,7 @@ int main(void) {
   }
 
   unsigned long long verification = slash(results);
-  unsigned long long expected = 0x6A0DF6DA0C58E00CULL;
+  unsigned long long expected = 0xD12CE2D383EF536FULL;
   expect(verification, expected, "Should Pass Verification Test");
 
   if(failed == 0) {
