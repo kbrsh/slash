@@ -3,22 +3,15 @@
 
 #define total 1000
 
-unsigned long long slashC(const unsigned char *key) {
-  unsigned long long result = 0;
-  unsigned long long prime = 0xA171020315130201ULL;
-
-  for(int i = 0; i < 8; i++) {
-    result = (result ^ key[i]) * (prime);
-    result = (result >> 7) | (result << 57);
-  }
-
-  return result;
+unsigned long long slashRandom(const unsigned long long key) {
+  unsigned long long result = key * 0xA01731A5AC74E8DBULL;
+  return (result >> 8) | (result << 56);
 }
 
 int main() {
   unsigned long long output = 1;
   for(int i = 0; i < total; i++) {
-    output = slashC((unsigned char*)&output);
+    output = slashRandom(output);
     printf("%d	%llu\n", i, output % total);
   }
   return 0;
