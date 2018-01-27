@@ -10,12 +10,12 @@
 unsigned long long slashC(const unsigned char *key) {
   // Slash C
   unsigned long long result = 0;
-  unsigned long long prime = 0xA171020315130201ULL;
+  unsigned long long prime = 0xA01731A5AC74E8DBULL;
   unsigned long long current;
 
   while((current = *key++) != '\0') {
     result = (result ^ current) * (prime);
-    result = (result >> 7) | (result << 57);
+    result = (result >> 8) | (result << 56);
   }
 
   return result;
@@ -71,28 +71,36 @@ unsigned long long mean(unsigned long long amount[totalKeys]) {
 
 void test(const char *name, unsigned char keys[totalKeys][keySize + 1], unsigned long long (*hash)(const unsigned char *key)) {
   // Benchmark time and cycles
-  clock_t secondsStart, secondsEnd;
-  double seconds[totalKeys];
+  clock_t timeStart, timeEnd;
+  double times[totalKeys];
 
   unsigned long long cyclesStart, cyclesEnd;
   unsigned long long cycles[totalKeys];
 
   unsigned long long results[totalKeys]__attribute__((unused));
 
+  // Time
   for(int i = 0; i < totalKeys; i++) {
-    secondsStart = clock();
-    cyclesStart = rdtsc();
-
+    timeStart = clock();
     results[i] = hash(keys[i]);
+    timeEnd = clock();
 
-    secondsEnd = clock();
+    times[i] = (double)(timeEnd - timeStart) / CLOCKS_PER_SEC;
+  }
+
+  // Cycles
+  for(int i = 0; i < totalKeys; i++) {
+    cyclesStart = rdtsc();
+    results[i] = hash(keys[i]);
     cyclesEnd = rdtsc();
 
-    seconds[i] = (secondsEnd - secondsStart) / ((unsigned long long)CLOCKS_PER_SEC / 1000000);
     cycles[i] = cyclesEnd - cyclesStart;
   }
 
-  printf("%s\n  took %.3fμs\n  %llu cycles per hash\n\n", name, doubleMean(seconds), mean(cycles));
+  double timesMean = doubleMean(times) * (double)1000000000;
+  unsigned long long cyclesMean = mean(cycles);
+
+  printf("%s\n  %.3fns per hash\n  %.3fns per byte\n  %llu cycles per hash\n  %.3f cycles per byte\n\n", name, timesMean, timesMean / (double)keySize, cyclesMean, (double)cyclesMean / (double)keySize);
 }
 
 int main(void) {
