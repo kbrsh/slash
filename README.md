@@ -21,7 +21,7 @@ Slash is implemented in 64 bit assembly, optimized for speed. The hashing proces
 
 1. The result is initialized to `0`
 2. For each byte (8 bits):
-   * Set the result to `ror((result ^ byte) * (prime), 7)`
+   * Set the result to `ror((result ^ byte) * (prime), 8)`
 3. Return 64 bit unsigned result
 
 ##### Details
@@ -30,9 +30,11 @@ Slash is implemented in 64 bit assembly, optimized for speed. The hashing proces
 * `^` denotes a 64 bit bitwise exclusive OR (XOR)
 * `ror` denotes a 64 bit bitwise circular right shift
 * `byte` denotes a the current byte being operated on
-* `prime` is a 64 bit constant chosen by a simulated annealing algorithm (`0xA171020315130201`)
+* `prime` is a 64 bit constant chosen by a simulated annealing algorithm (`0xA01731A5AC74E8DB`)
 
 Any overflows should be handled by "wrapping around" the number, equivalent to a modulo with 2<sup>64</sup>.
+
+<!-- Prime: f(num, current) = num * (current ^ num) + 17, where num = current sub prime (3, 5, 7), current = XOR of all outputs, f(num, current) = output after sub prime in prime -->
 
 ##### Verification
 
