@@ -14,3 +14,7 @@ gcc -Wall test/avalanche.c src/slash.o -o test/avalanche -I ./include
 # Compile and Run Chaos Grapher
 gcc -Wall test/graph.c src/slash.o -o test/graph -I ./include
 ./test/graph > points.txt
+
+# Compile and Run Noise Generator
+gcc -Wall test/noise.c src/slash.o -o test/noise -I ./include
+./test/noise > noise.txt
