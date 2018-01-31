@@ -6,7 +6,7 @@
 
 ### Usage
 
-Slash is a _non-cryptographic_ hash function intended to be used for general purposes. It is highly collision resistant, results in uniformly distributed hashes, and has good avalanche properties.
+Slash is a non-cryptographic hash function intended to be used for general purposes. It is highly collision resistant, results in uniformly distributed hashes, and has good avalanche properties.
 
 ```c
 #include "slash.h"
