@@ -5,7 +5,7 @@ unsigned int passed;
 unsigned int failed;
 
 void expect(unsigned long long num1, unsigned long long num2, char *message) {
-  // Assert Equality of Numbers
+  // Assert equality of numbers
   if(num1 == num2) {
     passed++;
     printf("\x1b[32m✓ \x1b[0m%s\n", message);
