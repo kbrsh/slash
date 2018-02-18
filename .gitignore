@@ -1,8 +1,8 @@
-dist
+bin/avalanche
+bin/benchmark
+bin/graph
+bin/noise
+bin/tester
 *.o
-src/slash
-test/avalanche
-test/benchmark
-test/graph
-test/test
+*.txt
 .DS_Store

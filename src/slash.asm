@@ -3,11 +3,11 @@ SECTION .data
   prime dq 0xA01731A5AC74E8DB
 
 SECTION .text
-  DEFAULT REL
+  DEFAULT abs
 
   ; Slash
-  GLOBAL _slash
-  _slash:
+  global slash
+  slash:
     ; Initialize variables
 
     ; result
