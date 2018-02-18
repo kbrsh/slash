@@ -15,6 +15,14 @@ const unsigned char *key = "Slash";
 unsigned long long hash = slash(key);
 ```
 
+### Building
+
+```shell
+$ git clone https://github.com/kbrsh/slash
+$ cd slash
+$ make all
+```
+
 ### Implementation
 
 Slash is implemented in 64 bit assembly, optimized for speed. The hashing process goes like:
@@ -23,14 +31,6 @@ Slash is implemented in 64 bit assembly, optimized for speed. The hashing proces
 2. For each byte (8 bits):
    * Set the result to `ror((result ^ byte) * (prime), 8)`
 3. Return 64 bit unsigned result
-
-### Building
-
-```shell
-$ git clone https://github.com/kbrsh/slash
-$ cd slash
-$ make all
-```
 
 ##### Details
 
