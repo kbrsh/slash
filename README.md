@@ -24,6 +24,14 @@ Slash is implemented in 64 bit assembly, optimized for speed. The hashing proces
    * Set the result to `ror((result ^ byte) * (prime), 8)`
 3. Return 64 bit unsigned result
 
+### Building
+
+```shell
+$ git clone https://github.com/kbrsh/slash
+$ cd slash
+$ make all
+```
+
 ##### Details
 
 * `*` denotes a 64 bit multiplication (mod 2<sup>64</sup>)
