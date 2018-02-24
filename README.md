@@ -15,6 +15,14 @@ const unsigned char *key = "Slash";
 unsigned long long hash = slash(key);
 ```
 
+### Building
+
+```shell
+$ git clone https://github.com/kbrsh/slash
+$ cd slash
+$ make
+```
+
 ### Implementation
 
 Slash is implemented in 64 bit assembly, optimized for speed. The hashing process goes like:
@@ -36,7 +44,7 @@ Any overflows should be handled by "wrapping around" the number, equivalent to a
 
 <!-- Prime: f(num, current) = num * (current ^ num) + 17, where num = current sub prime (3, 5, 7), current = XOR of all outputs, f(num, current) = output after sub prime in prime -->
 
-##### Verification
+##### Verifying
 
 To verify the implementation is correct, run it against byte arrays of `{1}, {1, 2}, {1, 2, 3} ... {1 - 255}`, and store all of the results in a byte array (in little-endian format).
 

@@ -1,20 +1,14 @@
-SECTION .data
-  ; Prime constant
-  prime dq 0xA01731A5AC74E8DB
-
-SECTION .text
-  DEFAULT REL
-
+section .text
   ; Slash
-  GLOBAL _slash
-  _slash:
+  global slash
+  slash:
     ; Initialize variables
 
     ; result
     xor rax, rax
 
     ; prime
-    mov r8, qword [prime]
+    mov r8, 0xA01731A5AC74E8DB
 
     ; current
     mov rdx, rdi
