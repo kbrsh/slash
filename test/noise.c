@@ -1,5 +1,5 @@
+#include <stdio.h>
 #include "slash.h"
-#include "stdio.h"
 
 #define total 100
 #define amplitude 1
