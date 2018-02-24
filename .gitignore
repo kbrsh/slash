@@ -1,8 +1,2 @@
-bin/avalanche
-bin/benchmark
-bin/graph
-bin/noise
-bin/tester
-*.o
-*.txt
+bin
 .DS_Store
