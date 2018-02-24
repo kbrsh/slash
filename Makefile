@@ -1,39 +1,29 @@
-# Define the commands
-CC := clang
-ASM := nasm
-
-# Compiler options
-BUILDDIR := build
-CFLAGS := -Wall -g
-INC := -I include/
-MODE :=
-
-# Guess platform
+# Platform-based mode
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-  MODE += elf64
+  MODE := elf64
 else ifeq ($(UNAME_S),Darwin)
-  MODE += macho64
+  MODE := macho64
 endif
 
-# Define the C compiling command
-C_COMPILE := $(CC) $(CFLAGS) $(INC) build/slash.o
+# Commands
+CC := clang
+AS := nasm
 
-# Compiling tasks
+# Compiler options
+CFLAGS := -Wall -I include/
+ASFLAGS := -f $(MODE)
+
+# Target files
+TARGETS := test benchmark avalanche graph
+
+# All
+all: slash.o $(TARGETS)
+
+# Slash
 slash.o: src/slash.asm
-	@echo "  $(ASM) -f $(MODE) $^ -o $(BUILDDIR)/$@"; $(ASM) -f $(MODE) $^ -o $(BUILDDIR)/$@
+	$(AS) $(ASFLAGS) $^ -o bin/$@
 
-tester: test/tester.c
-	@echo "  $(C_COMPILE) $^ -o bin/$@"; $(C_COMPILE) $^ -o bin/$@
-
-benchmark: test/benchmark.c
-	@echo "  $(C_COMPILE) $^ -o bin/$@"; $(C_COMPILE) $^ -o bin/$@
-
-avalanche: test/avalanche.c
-	@echo "  $(C_COMPILE) $^ -o bin/$@ -lm"; $(C_COMPILE) $^ -o bin/$@ -lm
-
-graph: test/graph.c
-	@echo "  $(C_COMPILE) $^ -o bin/$@"; $(C_COMPILE) $^ -o bin/$@
-
-# Combine all tasks
-all: slash.o tester benchmark avalanche graph
+# Targets
+$(TARGETS): %: test/%.c bin/slash.o
+	$(CC) $(CFLAGS) $^ -o bin/$@
