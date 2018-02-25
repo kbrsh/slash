@@ -15,7 +15,7 @@ CFLAGS := -Wall -I include/
 ASFLAGS := -f $(MODE)
 
 # Target files
-TARGETS := test benchmark avalanche graph noise
+TARGETS := test benchmark avalanche graph noise noise2D
 
 # All
 all: slash.o $(TARGETS)
