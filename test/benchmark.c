@@ -7,8 +7,8 @@
 #define totalKeys 50000
 #define keySize 64
 
+// Slash C
 unsigned long long slashC(const unsigned char *key) {
-  // Slash C
   unsigned long long result = 0;
   unsigned long long prime = 0xA01731A5AC74E8DBULL;
   unsigned long long current;
