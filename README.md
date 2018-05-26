@@ -56,4 +56,4 @@ Support Slash [on Patreon](https://patreon.com/kbrsh) to help sustain the develo
 
 ### License
 
-Licensed under the [MIT License](https://kbrsh.github.io/license) by [Kabir Shah](https://kabir.ml)
+Licensed under the [MIT License](https://kbrsh.github.io/license) by [Kabir Shah](https://kabir.sh)
