@@ -1,18 +1,8 @@
-# Platform-based mode
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
-  MODE := elf64
-else ifeq ($(UNAME_S),Darwin)
-  MODE := macho64
-endif
-
 # Commands
-CC := clang
-AS := nasm
+CC := gcc-7
 
 # Compiler options
-CFLAGS := -Wall -I include/
-ASFLAGS := -f $(MODE)
+CFLAGS := -Wall
 
 # Target files
 TARGETS := test benchmark avalanche graph noise noise2D
@@ -21,9 +11,15 @@ TARGETS := test benchmark avalanche graph noise noise2D
 all: slash.o $(TARGETS)
 
 # Slash
-slash.o: src/slash.asm
-	$(AS) $(ASFLAGS) $^ -o bin/$@
+slash.o: src/slash.c
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 # Targets
-$(TARGETS): %: test/%.c bin/slash.o
-	$(CC) $(CFLAGS) $^ -o bin/$@
+$(TARGETS): %: test/%.c
+	$(CC) $(CFLAGS) -c $^
+	$(CC) $(CFLAGS) slash.o $@.o -o bin/$@
+
+# Clean
+.PHONY: clean
+clean:
+	rm -f *.o bin/*

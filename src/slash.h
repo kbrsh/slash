@@ -8,6 +8,7 @@
 #ifndef SLASH
 #define SLASH
 
-extern unsigned long long slash(const unsigned char *key) asm("slash");
+unsigned long long slashInt(const unsigned long long key);
+unsigned long long slash(const unsigned char *key, int length);
 
 #endif
