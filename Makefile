@@ -3,6 +3,7 @@ CC := gcc-7
 
 # Compiler options
 CFLAGS := -Wall
+CLIBS := -lm
 
 # Target files
 TARGETS := test benchmark avalanche graph noise noise2D
@@ -17,7 +18,7 @@ slash.o: src/slash.c
 # Targets
 $(TARGETS): %: test/%.c
 	$(CC) $(CFLAGS) -c $^
-	$(CC) $(CFLAGS) slash.o $@.o -o bin/$@
+	$(CC) $(CFLAGS) slash.o $@.o -o bin/$@ $(CLIBS)
 
 # Clean
 .PHONY: clean
