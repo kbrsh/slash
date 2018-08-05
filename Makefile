@@ -2,7 +2,7 @@
 CC := gcc-7
 
 # Compiler options
-CFLAGS := -Wall
+CFLAGS := -Wall -O3
 CLIBS := -lm
 
 # Target files
