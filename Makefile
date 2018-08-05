@@ -1,5 +1,5 @@
 # Commands
-CC := gcc-7
+CC := gcc
 
 # Compiler options
 CFLAGS := -Wall -O3

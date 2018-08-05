@@ -28,14 +28,13 @@ unsigned long long slash(const unsigned char* key, int length) {
 	}
 
 	switch (length) {
-    case 8: break;
-		case 7: combine(result, (unsigned long long)data[6] << 48); break;
-		case 6: combine(result, (unsigned long long)data[5] << 40); break;
-		case 5: combine(result, (unsigned long long)data[4] << 32); break;
-		case 4: combine(result, (unsigned long long)data[3] << 24); break;
-		case 3: combine(result, (unsigned long long)data[2] << 16); break;
-		case 2: combine(result, (unsigned long long)data[1] << 8); break;
-		default: combine(result, (unsigned long long)data[0]); break;
+		case 7: combine(result, (unsigned long long)data[6] << 48);
+		case 6: combine(result, (unsigned long long)data[5] << 40);
+		case 5: combine(result, (unsigned long long)data[4] << 32);
+		case 4: combine(result, (unsigned long long)data[3] << 24);
+		case 3: combine(result, (unsigned long long)data[2] << 16);
+		case 2: combine(result, (unsigned long long)data[1] << 8);
+		default: combine(result, (unsigned long long)data[0]);
 	}
 
 	mix(result);
