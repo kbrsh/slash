@@ -1,8 +1,8 @@
 # Commands
-CC := gcc-7
+CC := gcc
 
 # Compiler options
-CFLAGS := -Wall
+CFLAGS := -Wall -O3
 
 # Target files
 TARGETS := test benchmark avalanche graph noise noise2D
