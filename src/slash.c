@@ -59,7 +59,7 @@ unsigned long long slash(const unsigned char* key, int length) {
 		case 4: combine(result, (unsigned long long)data[3] << 24);
 		case 3: combine(result, (unsigned long long)data[2] << 16);
 		case 2: combine(result, (unsigned long long)data[1] << 8);
-		default: combine(result, (unsigned long long)data[0]);
+		case 1: combine(result, (unsigned long long)data[0]);
 	}
 
 	mix(result);
