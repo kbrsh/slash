@@ -1,13 +1,37 @@
+#define C1 0xA7F7774CE67BD535ULL
+#define C2 0xA7EB2FBAFBB2FA55ULL
+#define C3 0xA7CC94E5DD4F7737ULL
+
 #define combine(result, current) result = result ^ (current);
 
+#define mixConstant(result, constant) \
+	unsigned long long x1 = result >> 32; \
+	unsigned long long x2 = result & 0xFFFFFFFF; \
+	unsigned long long x3 = constant >> 32; \
+	unsigned long long x4 = constant & 0xFFFFFFFF; \
+	unsigned long long x2x4 = x2 * x4; \
+	unsigned long long x1x4 = x1 * x4; \
+	unsigned long long x2x3 = x2 * x3; \
+	unsigned long long x1x3 = x1 * x3; \
+	unsigned long long xll = x2x4 & 0xFFFFFFFF; \
+	unsigned long long xlh = (x1x4 & 0xFFFFFFFF) + (x2x4 >> 32) + (x2x3 & 0xFFFFFFFF); \
+	unsigned long long xhl = (x1x4 >> 32) + (x1x3 & 0xFFFFFFFF) + (x2x3 >> 32) + (xlh >> 32); \
+	unsigned long long xhh = x1x3 >> 32; \
+	xlh = xlh & 0xFFFFFFFF; \
+	unsigned long long xl = xll + (xlh << 32); \
+	unsigned long long xh = xhl + (xhh << 32); \
+	result = xl ^ xh;
+
 #define mix(result) \
-	result = result * 0xA7EF77A80B732831ULL; \
-	result = (result >> 21) | (result << 43); \
-	result = result * 0xA7D3A48E08CBE2E3ULL; \
-	result = (result >> 22) | (result << 42); \
-	result = result * 0xA7F2BF9C29FF7D37ULL; \
-	result = (result >> 21) | (result << 43); \
-	result = result ^ (((result & 0x1FFFFF) + (result >> 43)) << 21);
+	{ \
+		mixConstant(result, C1); \
+	} \
+	{ \
+		mixConstant(result, C2); \
+	} \
+	{ \
+		mixConstant(result, C3); \
+	}
 
 unsigned long long slashInt(const unsigned long long key) {
 	unsigned long long result = key;
@@ -21,6 +45,7 @@ unsigned long long slash(const unsigned char* key, int length) {
 
 	while (length >= 8) {
 		combine(result, (unsigned long long)data[7] << 56 | (unsigned long long)data[6] << 48 | (unsigned long long)data[5] << 40 | (unsigned long long)data[4] << 32 | (unsigned long long)data[3] << 24 | (unsigned long long)data[2] << 16 | (unsigned long long)data[1] << 8 | (unsigned long long)data[0]);
+
 		mix(result);
 
 		data += 8;
