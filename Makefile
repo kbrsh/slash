@@ -1,8 +1,8 @@
 # Commands
-CC := gcc-7
+CC := gcc
 
 # Compiler options
-CFLAGS := -Wall
+CFLAGS := -Wall -O3
 CLIBS := -lm
 
 # Target files
