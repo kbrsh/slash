@@ -1,5 +1,4 @@
 import numpy as np
-import itertools
 
 def H(k):
     c = 2 ** k
@@ -21,77 +20,70 @@ def H(k):
             H(k - 1)
         )
 
-k = 3
-t = 2
-count = 0
+k = 8
 Hk = H(k)
 
-def randf():
-    return np.matrix([list(np.random.permutation(np.concatenate((np.zeros(2 ** (k - 1), dtype=int), np.ones(2 ** (k - 1), dtype=int)))))])
+def random():
+    return np.random.permutation(2 ** k)
 
-def search(f):
-    global count
-    fs = []
-    for bit in range(2 ** k):
-        for bbit in range(2 ** k):
-            new = np.copy(f)
+def nonlinearity(solution):
+    nonlinearities = np.empty(k, dtype=int)
+    fs = np.empty((k, 2 ** k))
 
-            if new[0, bit] == 0:
-                if new[0, bbit] == 1:
-                    new[0, bit] = 1
-                    new[0, bbit] = 0
+    for fvIndex, fv in enumerate(solution):
+        digits = format(fv, "0" + str(k) + "b")
+
+        for digitIndex in range(k):
+            digit = 0
+
+            if digitIndex < len(digits):
+                if digits[digitIndex] == "0":
+                    digit = 0
                 else:
-                    continue
-            else:
-                if new[0, bbit] == 0:
-                    new[0, bit] = 0
-                    new[0, bbit] = 1
-                else:
-                    continue
+                    digit = 1
 
-            r = np.dot(new, Hk)
-            nl = np.amax(np.abs(np.delete(r[0], 0)))
-            fs.append((nl, new))
+            fs[digitIndex, fvIndex] = digit
 
-    maximum = 0
+    for fIndex, f in enumerate(fs):
+        nonlinearities[fIndex] = (2 ** (k - 1)) - np.amax(np.abs(np.delete(np.dot(f, Hk)[0], 0)))
 
-    for nl, fc in fs:
-        if nl > maximum or nl == t:
-            maximum = nl
+    return nonlinearities
 
-    print("nl " + str(maximum) + "/" + str(t))
+def search():
+    a = 1
+    solution = np.random.permutation(2 ** k)
+    solutionNL = nonlinearity(solution)
 
-    for nl, fc in fs:
-        if nl == maximum:
-            if nl == t and (fc == 0).sum() == (2 ** (k - 1)) and (fc == 1).sum() == (2 ** (k - 1)):
-                return fc[0].tolist()
-            elif nl > t:
-                return search(randf())
-            else:
-                return search(fc)
+    while np.any(solutionNL < ((2 ** (k - 1)) - (2 * k) - 2)):
+        maxCandidate = None
+        maxNL = 0
 
-def isBijective(fs):
-    fst = np.transpose(fs).tolist()
-    for i, f in enumerate(fst[:-1]):
-        for j in range(i + 1, len(fst) - 1):
-            equal = True
+        for i in range(15):
+            swaps = np.random.randint(len(solution), size=a + 1)
 
-            for bits in zip(f, fst[j]):
-                b0, b1 = bits
-                if b0 != b1:
-                    equal = False
+            for swapIndex in range(len(swaps) - 1):
+                swap = swaps[swapIndex]
+                swapNext = swaps[swapIndex + 1]
 
-            if equal:
-                return False
+                candidate = np.copy(solution)
+                candidateTmp = candidate[swap]
+                candidate[swap] = candidate[swapNext]
+                candidate[swapNext] = candidateTmp
 
-    return True
+                candidateNL = nonlinearity(candidate)
 
-fs = []
+                if np.all(candidateNL >= maxNL):
+                    maxCandidate = candidate
+                    maxNL = candidateNL
 
-for i in range(k):
-    fs.append(search(randf()))
+        if maxNL.sum() > solutionNL.sum():
+            print("move", solutionNL, "->", maxNL)
+            solution = maxCandidate
+            solutionNL = nonlinearity(solution)
+            a = 1
+        else:
+            a = a + 1
 
-while not isBijective(fs):
-    fs[round(np.random.rand() * (k - 1))] = search(randf())
+    print(solution, solutionNL)
 
-print(fs)
+search()
