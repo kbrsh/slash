@@ -14,7 +14,7 @@ Slash is a non-cryptographic hash function intended to be used for general purpo
 const unsigned char *key = "Slash";
 unsigned long long hash = slash(key, 5);
 
-//-> 0x9C41E1880F4E303D
+//-> 0x2EF187C88FB36176
 ```
 
 ### Building
